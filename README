@@ -1,0 +1,24 @@
+# Create the image
+
+$ docker build -t angolini/imx-meta-fsl-bsp-release:1.0 .
+
+
+#Use the image
+
+. Install docker
+
+. Creat the folder to keep all the data (source code and images)
++
+[source]
+----
+$ mkdir ~/yocto-imx-bsp
+----
+
+. Run Docker
++
+[source]
+----
+$ docker run --rm -it -v ~/yocto-imx-bsp:/home/user/yocto-imx-bsp ID#
+----
+
+. The final image will be under `~/yocto-image-bsp/imx-4.9.88-2.0.0_ga/build/tmp/deploy/images/`
