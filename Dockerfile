@@ -25,15 +25,22 @@ RUN apt-get update && \
         sudo \
         iputils-ping \
         fluxbox \
-        repo
-        tightvncserver && \
-    useradd -U -m yoctouser && \
-    echo "#include /etc/sudoers.yoctousers" >> /etc/sudoers
+        repo \
+        vim nano && \
+    useradd -U -m user  && \
+    usermod -aG sudo user && \
+    echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
+    chmod 0440 /etc/sudoers.d/user && \
+    mkdir /home/user/yocto-imx-bsp && \
+    chown user:user /home/user/yocto-imx-bsp
 
-
-USER yoctouser
-WORKDIR /home/yoctouser
-CMD /bin/bash
+WORKDIR /home/user
 
 #add the links to download the source code
-ADD download_imx-4.9.88-2.0.0_ga.sh
+COPY download_imx-4.9.88-2.0.0_ga.sh .
+
+ENV LANG=en_US.UTF-8
+
+USER user
+
+CMD /bin/bash
