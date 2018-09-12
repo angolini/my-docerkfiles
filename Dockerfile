@@ -32,6 +32,7 @@ RUN apt-get update && \
     echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
     chmod 0440 /etc/sudoers.d/user && \
     mkdir /home/user/yocto-imx-bsp && \
+    /usr/sbin/locale-gen en_US.UTF-8 && \
     chown user:user /home/user/yocto-imx-bsp
 
 WORKDIR /home/user
@@ -39,8 +40,8 @@ WORKDIR /home/user
 #add the links to download the source code
 COPY download_imx-4.9.88-2.0.0_ga.sh .
 
-ENV LANG=en_US.UTF-8
-
 USER user
+
+ENV LANG=en_US.UTF-8
 
 CMD /bin/bash
